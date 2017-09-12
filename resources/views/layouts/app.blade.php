@@ -48,6 +48,7 @@
                             <li><a href="{{ route('dashboardUser') }}">Dashboard</a></li>
                             <li><a href="{{ route('senaraiUsers') }}">Users</a></li>
                             <li><a href="{{ route('senaraiProjects') }}">Projects</a></li>
+                            <li><a href="{{ route('senaraiLokasi') }}">Lokasi</a></li>
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">

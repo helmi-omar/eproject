@@ -47,3 +47,19 @@ Route::group(['prefix' => 'projects'], function () {
     })->name('editProject');
 
 });
+
+Route::group(['prefix' => 'lokasi'], function () {
+
+    Route::get('/', function () {
+        return view('lokasi/senarai');
+    })->name('senaraiLokasi');
+
+    Route::get('/add', function () {
+        return view('lokasi/borang_add');
+    })->name('addLokasi');
+
+    Route::get('/{id}/edit', function () {
+        return view('lokasi/borang_edit');
+    })->name('editLokasi');
+
+});
