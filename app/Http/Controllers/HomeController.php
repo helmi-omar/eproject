@@ -11,10 +11,10 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
 
     /**
      * Show the application dashboard.
@@ -23,6 +23,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $message = 'Selamat Datang';
+        $field_nama = '<input type="text" name="nama_user">';
+
+        return view('welcome', compact('message', 'field_nama') );
+    }
+
+
+    public function dashboard()
+    {
+        return view('dashboard');
     }
 }
