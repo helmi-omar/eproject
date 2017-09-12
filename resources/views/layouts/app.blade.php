@@ -74,7 +74,7 @@
                 </div>
             </div>
         </nav>
-
+        @include('layouts/alerts')
         @yield('content')
         
     </div>

@@ -8,12 +8,21 @@
                 <div class="panel-heading">Borang Tambah Lokasi Baru</div>
 
                 <div class="panel-body">
+                
                     
-                    <form class="form-horizontal">
+                    <form class="form-horizontal" method="POST" action="{{ route('storeLokasi') }}">
                         <div class="form-group">
-                            <label for="nama" class="col-sm-2 control-label">Nama Lokasi</label>
+                            <label for="nama" class="col-sm-2 control-label">Nama</label>
                             <div class="col-sm-10">
                                 <input type="text" name="nama" class="form-control" placeholder="Nama Lokasi">
+                                {{ $errors->first('nama') }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="nama" class="col-sm-2 control-label">Email</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="email" class="form-control" placeholder="Nama Lokasi">
+                                {{ $errors->first('email') }}
                             </div>
                         </div>
                         <div class="form-group">
@@ -21,7 +30,8 @@
                             <button type="submit" class="btn btn-primary">Save</button>
                             </div>
                         </div>
-                        
+                        {{ csrf_field() }}
+
                         
                     </form>
 

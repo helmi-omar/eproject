@@ -26,6 +26,7 @@ Route::group(['prefix' => 'lokasi'], function () {
 
     Route::get('/', 'LokasiController@index')->name('senaraiLokasi');
     Route::get('/add', 'LokasiController@create')->name('addLokasi');
+    Route::post('add', 'LokasiController@store')->name('storeLokasi');
     Route::get('/{id}/edit', 'LokasiController@edit')->name('editLokasi');
 
 });
