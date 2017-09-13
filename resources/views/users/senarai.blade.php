@@ -20,6 +20,7 @@
                                 <th>ID</th>
                                 <th>Nama</th>
                                 <th>Email</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -29,6 +30,9 @@
                             <td>{{ $item->id }}</td>
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->email }}</td>
+                            <td>
+                                <a href="{{ route('editUser', $item->id) }}">Edit</a>
+                            </td>
                         </tr>
 
                         @endforeach

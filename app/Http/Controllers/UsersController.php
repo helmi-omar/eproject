@@ -41,9 +41,9 @@ class UsersController extends Controller
     {
         // Form validation
         $request->validate([
-            'username' => 'required|alpha_num',
+            'username' => 'required|alpha_num|unique:users,username',
             'name' => 'required|string',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users,email',
             'password' => 'required|min:3|confirmed'
         ]);
 
@@ -87,7 +87,11 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        return view('users/borang_edit');
+        // Dapatkan 1 rekod yang dipilih
+        $user = DB::table('users')->where('id', $id)->first();
+
+        // Paparkan template
+        return view('users/borang_edit', compact('user'));
     }
 
     /**
@@ -99,7 +103,35 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // Form validation
+        $request->validate([
+            'username' => 'required|alpha_num',
+            'name' => 'required|string',
+            'email' => 'required|email',
+        ]);
+
+        // Dapatkan semua data
+        $data = $request->only([
+            'username', 
+            'name', 
+            'email', 
+            'address', 
+            'phone', 
+            'role' ,
+            'status'
+        ]);
+
+        // Encrypt Password dan masukkan ke array $data
+        if ( !empty( $request->input('password') ) )
+        {
+            $data['password'] = bcrypt( $request->input('password') );
+        }
+
+        // Simpan data ke table users
+        DB::table('users')->where('id', $id)->update($data);
+
+        // Redirect user ke halaman senarai users
+        return redirect()->route('senaraiUsers')->with('alert-success', 'Data berjaya dikemaskini!');
     }
 
     /**

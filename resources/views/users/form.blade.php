@@ -1,20 +1,7 @@
-@extends('layouts.app')
-
-@section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">Borang Kemaskini</div>
-
-                <div class="panel-body">
-                    
-                    <form class="form-horizontal" method="POST" action="{{ route('updateUser', $user->id) }}">
-                        
-                        <div class="form-group">
+<div class="form-group">
     <label for="nama" class="col-sm-2 control-label">Username</label>
     <div class="col-sm-10">
-        <input type="text" name="username" class="form-control" value="{{ $user->username }}">
+        <input type="text" name="username" class="form-control" value="{{ old('username') }}">
         {{ $errors->first('username') }}
     </div>
 </div>
@@ -22,7 +9,7 @@
 <div class="form-group">
     <label for="username" class="col-sm-2 control-label">Nama Penuh</label>
     <div class="col-sm-10">
-        <input type="text" name="name" class="form-control" value="{{ $user->name }}">
+        <input type="text" name="name" class="form-control">
         {{ $errors->first('name') }}
     </div>
 </div>
@@ -30,7 +17,7 @@
 <div class="form-group">
     <label for="name" class="col-sm-2 control-label">Email</label>
     <div class="col-sm-10">
-        <input type="text" name="email" class="form-control" value="{{ $user->email }}">
+        <input type="text" name="email" class="form-control">
         {{ $errors->first('email') }}
     </div>
 </div>
@@ -54,7 +41,7 @@
 <div class="form-group">
     <label for="phone" class="col-sm-2 control-label">Telefon</label>
     <div class="col-sm-10">
-        <input type="text" name="phone" class="form-control" value="{{ $user->phone }}">
+        <input type="text" name="phone" class="form-control">
         {{ $errors->first('name') }}
     </div>
 </div>
@@ -62,7 +49,7 @@
 <div class="form-group">
     <label for="address" class="col-sm-2 control-label">Alamat</label>
     <div class="col-sm-10">
-        <textarea name="address" class="form-control">{{ $user->address }}</textarea>
+        <textarea name="address" class="form-control"></textarea>
         {{ $errors->first('address') }}
     </div>
 </div>
@@ -95,15 +82,3 @@
     <button type="submit" class="btn btn-primary">Save</button>
     </div>
 </div>
-                        {{ csrf_field() }}
-                        <input type="hidden" name="_method" value="PATCH">
-
-                        
-                    </form>
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-@endsection
