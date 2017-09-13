@@ -46,6 +46,26 @@ class UsersController extends Controller
             'email' => 'required|email',
             'password' => 'required|min:3|confirmed'
         ]);
+
+        // Dapatkan semua data
+        $data = $request->only([
+            'username', 
+            'name', 
+            'email', 
+            'address', 
+            'phone', 
+            'role' ,
+            'status'
+        ]);
+
+        // Encrypt Password dan masukkan ke array $data
+        $data['password'] = bcrypt( $request->input('password') );
+
+        // Simpan data ke table users
+        DB::table('users')->insert($data);
+
+        // Redirect user ke halaman senarai users
+        return redirect()->route('senaraiUsers');
     }
 
     /**
