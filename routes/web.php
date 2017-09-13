@@ -10,6 +10,7 @@ Route::group(['prefix' => 'users'], function () {
 
     Route::get('/', 'UsersController@index')->name('senaraiUsers');
     Route::get('/add', 'UsersController@create')->name('addUser');
+    Route::post('/add', 'UsersController@store')->name('storeUser');
     Route::get('/{id}/edit', 'UsersController@edit')->name('editUser');
 
 });
