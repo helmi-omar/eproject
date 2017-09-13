@@ -7,3 +7,11 @@
         </ul>
     </div>
 @endif
+
+@if( session('alert-success') )
+    <div class="alert alert-success">
+        <ul>
+            {{ session('alert-success') }}
+        </ul>
+    </div>
+@endif

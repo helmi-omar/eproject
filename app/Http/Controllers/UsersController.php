@@ -65,7 +65,7 @@ class UsersController extends Controller
         DB::table('users')->insert($data);
 
         // Redirect user ke halaman senarai users
-        return redirect()->route('senaraiUsers');
+        return redirect()->route('senaraiUsers')->with('alert-success', 'Data berjaya ditambah!');
     }
 
     /**
