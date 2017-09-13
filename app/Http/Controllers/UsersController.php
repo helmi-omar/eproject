@@ -142,6 +142,7 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
+        // Cari user berdasarkan id dan hapuskan rekod
         DB::table('users')->where('id', $id)->delete();
 
         // Redirect user ke halaman senarai users
