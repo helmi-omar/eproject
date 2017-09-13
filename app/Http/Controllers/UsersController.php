@@ -39,7 +39,13 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Form validation
+        $request->validate([
+            'username' => 'required|alpha_num',
+            'name' => 'required|string',
+            'email' => 'required|email',
+            'password' => 'required|min:3|confirmed'
+        ]);
     }
 
     /**
