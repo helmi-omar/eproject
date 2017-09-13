@@ -142,6 +142,9 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('users')->where('id', $id)->delete();
+
+        // Redirect user ke halaman senarai users
+        return redirect()->route('senaraiUsers')->with('alert-success', 'Data berjaya dihapuskan!');
     }
 }

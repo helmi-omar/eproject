@@ -13,6 +13,7 @@ Route::group(['prefix' => 'users'], function () {
     Route::post('/add', 'UsersController@store')->name('storeUser');
     Route::get('/{id}/edit', 'UsersController@edit')->name('editUser');
     Route::patch('/{id}', 'UsersController@update')->name('updateUser');
+    Route::delete('/{id}', 'UsersController@destroy')->name('deleteUser');
 
 });
 

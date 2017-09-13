@@ -31,7 +31,38 @@
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->email }}</td>
                             <td>
-                                <a href="{{ route('editUser', $item->id) }}">Edit</a>
+                                <a href="{{ route('editUser', $item->id) }}"  class="btn btn-xs btn-primary">Edit</a>
+
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#delete-{{ $item->id }}">
+                                    Delete
+                                </button>
+
+                                <!-- Modal -->
+                                <form method="POST" action="{{ route('deleteUser', $item->id) }}">
+                                    {{ csrf_field() }}
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    
+                                
+                                    <div class="modal fade" id="delete-{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">Sahkan Hapus Data</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            Adakah anda ingin hapuskan rekod {{ $item->name }}?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-danger">Confirm</button>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    </div>
+
+                                </form>
                             </td>
                         </tr>
 
