@@ -11,6 +11,41 @@
                     <a href="{{ route('addUser') }}" class="btn btn-primary">
                         Tambah User
                     </a>
+
+                    @if ( count( $users ) )
+
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nama</th>
+                                <th>Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @foreach( $users as $item )
+
+                        <tr>
+                            <td>{{ $item->id }}</td>
+                            <td>{{ $item->name }}</td>
+                            <td>{{ $item->email }}</td>
+                        </tr>
+
+                        @endforeach
+                        </tbody>
+
+                    </table>
+
+                    {{ $users->links() }}
+
+                    @else
+
+                    <div class="alert alert-info">
+                        Tiada rekod users
+                    </div>
+
+                    @endif
+                   
                 </div>
             </div>
         </div>

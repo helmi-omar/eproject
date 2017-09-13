@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
 
 class LokasiController extends Controller
 {
@@ -13,7 +14,9 @@ class LokasiController extends Controller
      */
     public function index()
     {
-        return view('lokasi/senarai');
+        $results = DB::table('lokasi')->get();
+
+        return view('lokasi/senarai', compact('results'));
     }
 
     /**

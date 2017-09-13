@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
 
 class UsersController extends Controller
 {
@@ -13,7 +14,11 @@ class UsersController extends Controller
      */
     public function index() 
     {
-        return view('users/senarai');
+        // Query ke table users
+        $users = DB::table('users')->orderBy('id', 'desc')->paginate(10);
+
+        // Paparkan template
+        return view('users/senarai', compact('users'));
     }
 
     /**
