@@ -9,7 +9,7 @@
 
                 <div class="panel-body">
                     
-                    <form class="form-horizontal" method="POST" action="{{ route('storeLokasi') }}">
+                    <form class="form-horizontal" method="POST" action="{{ route('storeUser') }}">
                         
                         <div class="form-group">
                             <label for="nama" class="col-sm-2 control-label">Username</label>
