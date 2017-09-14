@@ -21,7 +21,10 @@ Route::group(['prefix' => 'projects'], function () {
 
     Route::get('/', 'ProjectsController@index')->name('senaraiProjects');
     Route::get('/add', 'ProjectsController@create')->name('addProject');
+    Route::post('/add', 'ProjectsController@store')->name('storeProject');
     Route::get('/{id}/edit', 'ProjectsController@edit')->name('editProject');
+    Route::patch('/{id}', 'ProjectsController@update')->name('updateProject');
+    Route::delete('/{id}', 'ProjectsController@destroy')->name('deleteProject');
 
 });
 
@@ -31,5 +34,7 @@ Route::group(['prefix' => 'lokasi'], function () {
     Route::get('/add', 'LokasiController@create')->name('addLokasi');
     Route::post('add', 'LokasiController@store')->name('storeLokasi');
     Route::get('/{id}/edit', 'LokasiController@edit')->name('editLokasi');
+    Route::patch('/{id}', 'LokasiController@update')->name('updateLokasi');
+    Route::delete('/{id}', 'LokasiController@destroy')->name('deleteLokasi');
 
 });

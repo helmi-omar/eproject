@@ -15,7 +15,8 @@ class LokasiController extends Controller
      */
     public function index()
     {
-        $results = DB::table('lokasi')->get();
+        //$results = DB::table('lokasi')->get();
+        $results = Lokasi::all();
 
         return view('lokasi/senarai', compact('results'));
     }
@@ -84,7 +85,19 @@ class LokasiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nama' => 'required|min:3',
+            'person_in_charge' => 'required'
+        ]);
+
+        // Simpan rekod ke dalam table lokasi
+        $data = Lokasi::find($id);
+        $data->nama = $request->input('nama');
+        $data->person_in_charge = $request->input('person_in_charge');
+        $data->save();
+
+        // Redirect user ke halaman senarai users
+        return redirect()->route('senaraiLokasi')->with('alert-success', $data->nama . ' berjaya ditambah!');
     }
 
     /**

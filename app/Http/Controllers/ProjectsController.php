@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Lokasi;
+use App\Project;
 
 class ProjectsController extends Controller
 {
@@ -13,7 +15,9 @@ class ProjectsController extends Controller
      */
     public function index()
     {
-        return view('projects/senarai');
+        $results = Project::paginate(10);
+
+        return view('projects/senarai', compact('results') );
     }
 
     /**
@@ -23,7 +27,9 @@ class ProjectsController extends Controller
      */
     public function create()
     {
-        return view('projects/borang_add');
+        $lokasi = Lokasi::select('nama', 'id')->get();
+
+        return view('projects/borang_add', compact('lokasi'));
     }
 
     /**
@@ -34,7 +40,17 @@ class ProjectsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'lokasi_id' => 'required|integer'
+        ]);
+
+        $data = $request->all();
+        
+        Project::create($data);
+
+        return redirect()->route('senaraiProjects')->with('alert-success', 'Project baru berjaya ditambah!');
+
     }
 
     /**

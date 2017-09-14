@@ -93,7 +93,8 @@ class UsersController extends Controller
     public function edit($id)
     {
         // Dapatkan 1 rekod yang dipilih
-        $user = DB::table('users')->where('id', $id)->first();
+        // $user = DB::table('users')->where('id', $id)->first();
+        $user = User::find($id);
 
         // Paparkan template
         return view('users/borang_edit', compact('user'));
@@ -141,7 +142,8 @@ class UsersController extends Controller
     public function destroy($id)
     {
         // Cari user berdasarkan id dan hapuskan rekod
-        DB::table('users')->where('id', $id)->delete();
+        // DB::table('users')->where('id', $id)->delete();
+        User::find($id)->delete();
 
         // Redirect user ke halaman senarai users
         return redirect()->route('senaraiUsers')->with('alert-success', 'Data berjaya dihapuskan!');
