@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -45,11 +46,14 @@
                         @guest
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
+                        @else
+
                             <li><a href="{{ route('dashboardUser') }}">Dashboard</a></li>
+                            @if (Auth::user()->role == 'admin')
                             <li><a href="{{ route('senaraiUsers') }}">Users</a></li>
+                            @endif
                             <li><a href="{{ route('senaraiProjects') }}">Projects</a></li>
                             <li><a href="{{ route('senaraiLokasi') }}">Lokasi</a></li>
-                        @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -81,5 +85,8 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <!-- DataTables -->
+    <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+    @yield('script')
 </body>
 </html>

@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use App\User;
+use Yajra\Datatables\Datatables;
+
+use Mail;
+use App\Mail\AccountBaru;
 
 class UsersController extends Controller
 {
@@ -17,10 +21,54 @@ class UsersController extends Controller
     {
         // Query ke table users
         // $users = DB::table('users')->orderBy('id', 'desc')->paginate(10);
-        $users = User::orderBy('id', 'desc')->paginate(10);
+        // $users = User::orderBy('id', 'desc')->paginate(10);
 
         // Paparkan template
-        return view('users/senarai', compact('users'));
+        return view('users/senarai');
+    }
+
+    public function datatables() 
+    {
+        $users = User::select('id', 'name', 'email');
+
+        return datatables()->of($users)
+        ->addColumn('action', function ($item) {
+                return '<a href="'. route('editUser', $item->id) .'"  class="btn btn-xs btn-primary">Edit</a>
+                
+                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#delete-' .$item->id .'">
+                                    Delete
+                                </button>
+
+                                <!-- Modal -->
+                                <form method="POST" action="'.route('deleteUser', $item->id).'">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <input type="hidden" name="_token" value="'. csrf_token() .'">
+                                    
+                                
+                                    <div class="modal fade" id="delete-'. $item->id .'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">Sahkan Hapus Data</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            Adakah anda ingin hapuskan rekod '.$item->name .'?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-danger">Confirm</button>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    </div>
+
+                                </form>
+                
+                ';
+            })
+        ->make(true);
     }
 
     /**
@@ -68,6 +116,9 @@ class UsersController extends Controller
         // DB::table('users')->insert($data);
         // User::insert($data);
         $user = User::create($data);
+
+        // Email maklumat akaun kepada user
+        Mail::to($user->email)->send(new AccountBaru($user));
 
         // Redirect user ke halaman senarai users
         return redirect()->route('senaraiUsers')->with('alert-success', $user->name . ' berjaya ditambah!');

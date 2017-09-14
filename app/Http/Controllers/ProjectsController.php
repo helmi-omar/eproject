@@ -72,7 +72,10 @@ class ProjectsController extends Controller
      */
     public function edit($id)
     {
-        return view('projects/borang_edit');
+        $project = Project::find($id);
+        $lokasi = Lokasi::pluck('nama', 'id');
+
+        return view('projects/borang_edit', compact('project', 'lokasi'));
     }
 
     /**

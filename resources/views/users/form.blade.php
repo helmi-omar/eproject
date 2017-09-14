@@ -34,7 +34,7 @@
     <label for="password" class="col-sm-2 control-label">Password Confirmation</label>
     <div class="col-sm-10">
         {!! Form::password('password_confirmation', ['class' => 'form-control']) !!}
-        {{ $errors->first('passwpassword_confirmationord') }}
+        {{ $errors->first('password_confirmation') }}
     </div>
 </div>
 
