@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use App\User;
 
 class UsersController extends Controller
 {
@@ -15,7 +16,8 @@ class UsersController extends Controller
     public function index() 
     {
         // Query ke table users
-        $users = DB::table('users')->orderBy('id', 'desc')->paginate(10);
+        // $users = DB::table('users')->orderBy('id', 'desc')->paginate(10);
+        $users = User::orderBy('id', 'desc')->paginate(10);
 
         // Paparkan template
         return view('users/senarai', compact('users'));
@@ -48,24 +50,27 @@ class UsersController extends Controller
         ]);
 
         // Dapatkan semua data
-        $data = $request->only([
-            'username', 
-            'name', 
-            'email', 
-            'address', 
-            'phone', 
-            'role' ,
-            'status'
-        ]);
+        // $data = $request->only([
+        //     'username', 
+        //     'name', 
+        //     'email', 
+        //     'address', 
+        //     'phone', 
+        //     'role' ,
+        //     'status'
+        // ]);
+        $data = $request->all();
 
         // Encrypt Password dan masukkan ke array $data
         $data['password'] = bcrypt( $request->input('password') );
 
         // Simpan data ke table users
-        DB::table('users')->insert($data);
+        // DB::table('users')->insert($data);
+        // User::insert($data);
+        $user = User::create($data);
 
         // Redirect user ke halaman senarai users
-        return redirect()->route('senaraiUsers')->with('alert-success', 'Data berjaya ditambah!');
+        return redirect()->route('senaraiUsers')->with('alert-success', $user->name . ' berjaya ditambah!');
     }
 
     /**
@@ -111,15 +116,7 @@ class UsersController extends Controller
         ]);
 
         // Dapatkan semua data
-        $data = $request->only([
-            'username', 
-            'name', 
-            'email', 
-            'address', 
-            'phone', 
-            'role' ,
-            'status'
-        ]);
+        $data = $request->except('password');
 
         // Encrypt Password dan masukkan ke array $data
         if ( !empty( $request->input('password') ) )
@@ -128,7 +125,8 @@ class UsersController extends Controller
         }
 
         // Simpan data ke table users
-        DB::table('users')->where('id', $id)->update($data);
+        // DB::table('users')->where('id', $id)->update($data);
+        User::find($id)->update($data);
 
         // Redirect user ke halaman senarai users
         return redirect()->route('senaraiUsers')->with('alert-success', 'Data berjaya dikemaskini!');
