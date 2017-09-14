@@ -19,10 +19,10 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="nama" class="col-sm-2 control-label">Email</label>
+                            <label for="nama" class="col-sm-2 control-label">Person in Charge</label>
                             <div class="col-sm-10">
-                                <input type="text" name="email" class="form-control" placeholder="Nama Lokasi">
-                                {{ $errors->first('email') }}
+                                <input type="text" name="person_in_charge" class="form-control" placeholder="Nama Petugas">
+                                {{ $errors->first('person_in_charge') }}
                             </div>
                         </div>
                         <div class="form-group">

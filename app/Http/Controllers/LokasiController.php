@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use App\Lokasi;
 
 class LokasiController extends Controller
 {
@@ -39,9 +40,17 @@ class LokasiController extends Controller
     {
         $request->validate([
             'nama' => 'required|min:3',
-            'email' => 'required|email'
-
+            'person_in_charge' => 'required'
         ]);
+
+        // Simpan rekod ke dalam table lokasi
+        $data = new Lokasi;
+        $data->nama = $request->input('nama');
+        $data->person_in_charge = $request->input('person_in_charge');
+        $data->save();
+
+        // Redirect user ke halaman senarai users
+        return redirect()->route('senaraiLokasi')->with('alert-success', $data->nama . ' berjaya ditambah!');
     }
 
     /**

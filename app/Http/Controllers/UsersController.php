@@ -110,9 +110,9 @@ class UsersController extends Controller
     {
         // Form validation
         $request->validate([
-            'username' => 'required|alpha_num',
+            'username' => 'required|alpha_num|unique:users,username,' . $id,
             'name' => 'required|string',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users,email,' . $id,
         ]);
 
         // Dapatkan semua data
