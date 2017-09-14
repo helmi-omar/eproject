@@ -9,97 +9,11 @@
 
                 <div class="panel-body">
                     
-                    <form class="form-horizontal" method="POST" action="{{ route('updateUser', $user->id) }}">
-                        
-                        <div class="form-group">
-    <label for="nama" class="col-sm-2 control-label">Username</label>
-    <div class="col-sm-10">
-        <input type="text" name="username" class="form-control" value="{{ $user->username }}">
-        {{ $errors->first('username') }}
-    </div>
-</div>
+                    {!! Form::model($user, ['method' => 'PATCH', 'route' => ['updateUser', $user->id], 'class' => 'form-horizontal']) !!}
 
-<div class="form-group">
-    <label for="username" class="col-sm-2 control-label">Nama Penuh</label>
-    <div class="col-sm-10">
-        <input type="text" name="name" class="form-control" value="{{ $user->name }}">
-        {{ $errors->first('name') }}
-    </div>
-</div>
+                    @include('users/form')
 
-<div class="form-group">
-    <label for="name" class="col-sm-2 control-label">Email</label>
-    <div class="col-sm-10">
-        <input type="text" name="email" class="form-control" value="{{ $user->email }}">
-        {{ $errors->first('email') }}
-    </div>
-</div>
-
-<div class="form-group">
-    <label for="password" class="col-sm-2 control-label">Password</label>
-    <div class="col-sm-10">
-        <input type="password" name="password" class="form-control">
-        {{ $errors->first('password') }}
-    </div>
-</div>
-
-<div class="form-group">
-    <label for="password" class="col-sm-2 control-label">Password Confirmation</label>
-    <div class="col-sm-10">
-        <input type="password" name="password_confirmation" class="form-control">
-        {{ $errors->first('passwpassword_confirmationord') }}
-    </div>
-</div>
-
-<div class="form-group">
-    <label for="phone" class="col-sm-2 control-label">Telefon</label>
-    <div class="col-sm-10">
-        <input type="text" name="phone" class="form-control" value="{{ $user->phone }}">
-        {{ $errors->first('name') }}
-    </div>
-</div>
-
-<div class="form-group">
-    <label for="address" class="col-sm-2 control-label">Alamat</label>
-    <div class="col-sm-10">
-        <textarea name="address" class="form-control">{{ $user->address }}</textarea>
-        {{ $errors->first('address') }}
-    </div>
-</div>
-
-<div class="form-group">
-    <label for="role" class="col-sm-2 control-label">Role</label>
-    <div class="col-sm-10">
-        <select name="role" class="form-control">
-            <option value="user">User</option>
-            <option value="admin">Admin</option>
-        </select>
-        {{ $errors->first('role') }}
-    </div>
-</div>
-
-<div class="form-group">
-    <label for="status" class="col-sm-2 control-label">Status</label>
-    <div class="col-sm-10">
-        <select name="status" class="form-control">
-            <option value="active">Active</option>
-            <option value="pending">Pending</option>
-            <option value="banned">Banned</option>
-        </select>
-        {{ $errors->first('status') }}
-    </div>
-</div>
-
-<div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-    <button type="submit" class="btn btn-primary">Save</button>
-    </div>
-</div>
-                        {{ csrf_field() }}
-                        <input type="hidden" name="_method" value="PATCH">
-
-                        
-                    </form>
+                    {!! Form::close() !!}
 
                 </div>
             </div>

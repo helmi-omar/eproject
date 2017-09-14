@@ -7,15 +7,13 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Borang Tambah User Baru</div>
 
-                <div class="panel-body">
-                    
-                    <form class="form-horizontal" method="POST" action="{{ route('storeUser') }}">
-                        
-                        @include('users/form')
-                        {{ csrf_field() }}
+                <div class="panel-body">                        
 
-                        
-                    </form>
+                    {!! Form::open(['method' => 'POST', 'route' => 'storeUser', 'class' => 'form-horizontal']) !!}
+
+                    @include('users/form')
+
+                    {!! Form::close() !!}
 
                 </div>
             </div>
